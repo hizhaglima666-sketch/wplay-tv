@@ -1,78 +1,89 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Wplay TV — Teste 4 Horas</title>
+
+<style>
+body{
+  margin:0;
+  font-family:Arial, sans-serif;
+  background:#0f172a;
+  color:#fff;
+  text-align:center;
+}
+.container{
+  max-width:600px;
+  margin:auto;
+  padding:30px 20px;
+}
+h1{
+  font-size:28px;
+}
+.card{
+  background:#1e293b;
+  padding:20px;
+  border-radius:12px;
+  margin-top:20px;
+}
+.btn{
+  display:inline-block;
+  background:#22c55e;
+  color:#000;
+  padding:14px 20px;
+  border-radius:8px;
+  text-decoration:none;
+  font-weight:bold;
+  margin-top:15px;
+}
+.btn:hover{
+  opacity:0.9;
+}
+.small{
+  font-size:14px;
+  opacity:0.8;
+}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+<h1>📺 Wplay TV</h1>
+<p>Teste gratuito por <strong>4 horas</strong></p>
+
+<div class="card">
+  <p>✔ Planos mensais</p>
+  <p>✔ Funciona em TV, celular e computador</p>
+  <p>✔ Suporte das 08:00 às 23:00</p>
+</div>
+
+<a class="btn" href="#" onclick="openWhatsApp()">💬 PEDIR TESTE AGORA</a>
+
+<p class="small" style="margin-top:20px;">
+1 aparelho: R$30 • 2 aparelhos: R$35 • 3 aparelhos: R$45
+</p>
+
+</div>
+
 <script>
-  // =========================
-  // CONFIGURAÇÃO PRINCIPAL
-  // =========================
-  // WhatsApp no formato: 55DDDNUMERO (sem +, sem espaços)
-  const WA_NUMBER = "5599985291535";
+const WA_NUMBER = "5599985291535";
 
-  // Texto padrão base (mensagem profissional)
-  function buildMessage(overrides = {}) {
-    const nome = (document.getElementById("nome")?.value || "").trim();
-    const pais = document.getElementById("pais")?.value || "Brasil";
-    const aparelho = document.getElementById("aparelho")?.value || "";
-    const plano = overrides.plan || (document.getElementById("plano")?.value || "");
-    const horario = document.getElementById("horario")?.value || "";
-    const extra = (document.getElementById("msgExtra")?.value || "").trim();
+function openWhatsApp(){
+  const message = encodeURIComponent(
+`Olá! Quero solicitar o teste de 4 horas da Wplay TV.
 
-    // Captura UTM (se você usar anúncios/campanhas)
-    const params = new URLSearchParams(window.location.search);
-    const utmSource = params.get("utm_source");
-    const utmCampaign = params.get("utm_campaign");
+Aparelho: __________
+País: __________
 
-    let msg =
-`Olá! ${nome ? "Meu nome é " + nome + ". " : ""}Gostaria de solicitar o *teste de 4 horas* da *Wplay TV*, por favor.
+Aguardo instruções. Obrigado!`
+  );
 
-• País: ${pais}
-• Aparelho: ${aparelho}
-• Plano de interesse: ${plano}
-• Melhor horário para suporte (08h–23h): ${horario}`;
-
-    if (extra) msg += `\n• Observação: ${extra}`;
-
-    if (utmSource || utmCampaign) {
-      msg += `\n\n(Origem: ${utmSource || "-"} | Campanha: ${utmCampaign || "-"})`;
-    }
-
-    msg += `\n\nAguardo as instruções. Obrigado!`;
-    return msg;
-  }
-
-  function waLink(message) {
-    const text = encodeURIComponent(message);
-    return `https://wa.me/${WA_NUMBER}?text=${text}`;
-  }
-
-  function openWhatsApp(custom = {}) {
-    const msg = buildMessage(custom);
-    window.open(waLink(msg), "_blank", "noopener");
-  }
-
-  // Botões gerais
-  document.getElementById("ctaTop")?.addEventListener("click", (e)=>{ e.preventDefault(); openWhatsApp(); });
-  document.getElementById("ctaHero")?.addEventListener("click", (e)=>{ e.preventDefault(); openWhatsApp(); });
-  document.getElementById("ctaBottom")?.addEventListener("click", (e)=>{ e.preventDefault(); openWhatsApp(); });
-  document.getElementById("btnWhats")?.addEventListener("click", (e)=>{ e.preventDefault(); openWhatsApp(); });
-
-  // Botões de plano
-  document.querySelectorAll(".planBtn").forEach(btn => {
-    btn.addEventListener("click", (e) => {
-      e.preventDefault();
-      const plan = btn.getAttribute("data-plan") || "";
-      const sel = document.getElementById("plano");
-      if (sel) sel.value = plan;
-      openWhatsApp({ plan });
-    });
-  });
-
-  // Copiar mensagem
-  document.getElementById("btnCopy")?.addEventListener("click", async (e)=>{
-    e.preventDefault();
-    const msg = buildMessage();
-    try{
-      await navigator.clipboard.writeText(msg);
-      alert("Mensagem copiada! Agora é só colar no WhatsApp.");
-    }catch(err){
-      alert("Não consegui copiar automaticamente. Selecione e copie manualmente.");
-    }
-  });
+  window.open(`https://wa.me/${WA_NUMBER}?text=${message}`, "_blank");
+}
 </script>
+
+</body>
+</html>
