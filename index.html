@@ -1,1 +1,510 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Wplay TV — TV online por aplicativo</title>
+  <meta name="description" content="Wplay TV: TV online por aplicativo. Teste por 4 horas. Planos mensais por dispositivo. Suporte 08:00 às 23:00." />
 
+  <!-- Open Graph (preview no WhatsApp/Facebook) -->
+  <meta property="og:title" content="Wplay TV — TV online por aplicativo" />
+  <meta property="og:description" content="Teste por 4 horas • Planos mensais • Suporte 08:00 às 23:00" />
+  <meta property="og:type" content="website" />
+  <!-- Se tiver uma imagem, coloque o link: -->
+  <!-- <meta property="og:image" content="https://seusite.com/og-image.jpg" /> -->
+
+  <style>
+    :root{
+      --bg:#0b0f19;
+      --card:#111827;
+      --text:#e5e7eb;
+      --muted:#9ca3af;
+      --line:#1f2937;
+      --brand:#22c55e;
+      --brand2:#38bdf8;
+      --danger:#ef4444;
+      --radius:16px;
+    }
+    *{box-sizing:border-box}
+    body{
+      margin:0; font-family:system-ui,-apple-system,Segoe UI,Roboto,Ubuntu,Cantarell,Noto Sans,sans-serif;
+      background: radial-gradient(1200px 600px at 20% -10%, rgba(56,189,248,.18), transparent 55%),
+                  radial-gradient(900px 500px at 80% 0%, rgba(34,197,94,.18), transparent 55%),
+                  var(--bg);
+      color:var(--text);
+      line-height:1.5;
+    }
+    a{color:inherit}
+    .container{max-width:1100px; margin:0 auto; padding:24px}
+    header{
+      display:flex; align-items:center; justify-content:space-between; gap:16px;
+      padding:14px 0 22px; border-bottom:1px solid var(--line);
+      position:sticky; top:0; background:rgba(11,15,25,.85); backdrop-filter:blur(10px);
+      z-index:10;
+    }
+    .brand{
+      display:flex; align-items:center; gap:10px; text-decoration:none;
+    }
+    .logo{
+      width:38px; height:38px; border-radius:10px;
+      background:linear-gradient(135deg, var(--brand2), var(--brand));
+      display:grid; place-items:center; font-weight:800; color:#00130a;
+    }
+    nav{display:flex; gap:14px; flex-wrap:wrap}
+    nav a{color:var(--muted); text-decoration:none; font-size:14px}
+    nav a:hover{color:var(--text)}
+    .btn{
+      display:inline-flex; align-items:center; justify-content:center; gap:10px;
+      border:1px solid var(--line);
+      padding:12px 14px; border-radius:12px;
+      background:rgba(17,24,39,.6);
+      color:var(--text); text-decoration:none;
+      cursor:pointer;
+      transition:transform .08s ease, background .2s ease, border-color .2s ease;
+      font-weight:600;
+      white-space:nowrap;
+    }
+    .btn:hover{border-color:rgba(56,189,248,.45); background:rgba(17,24,39,.85)}
+    .btn:active{transform:translateY(1px)}
+    .btn-primary{
+      border-color:rgba(34,197,94,.45);
+      background:linear-gradient(135deg, rgba(34,197,94,.18), rgba(56,189,248,.12));
+    }
+    .btn-primary:hover{border-color:rgba(34,197,94,.75)}
+    .hero{
+      display:grid; grid-template-columns:1.2fr .8fr; gap:22px;
+      padding:28px 0;
+    }
+    @media(max-width:920px){ .hero{grid-template-columns:1fr; } header{position:relative} }
+    .card{
+      background:rgba(17,24,39,.72);
+      border:1px solid var(--line);
+      border-radius:var(--radius);
+      padding:18px;
+    }
+    h1{font-size:40px; line-height:1.1; margin:0 0 10px}
+    @media(max-width:520px){ h1{font-size:32px} }
+    .lead{color:var(--muted); font-size:16px; margin:0 0 16px}
+    .badges{display:flex; gap:10px; flex-wrap:wrap; margin:14px 0 18px}
+    .badge{
+      font-size:13px; color:var(--text);
+      border:1px solid var(--line);
+      padding:8px 10px; border-radius:999px;
+      background:rgba(0,0,0,.16);
+    }
+    .grid{
+      display:grid; gap:14px;
+    }
+    .grid-3{grid-template-columns:repeat(3, 1fr)}
+    .grid-2{grid-template-columns:repeat(2, 1fr)}
+    @media(max-width:920px){ .grid-3{grid-template-columns:1fr} .grid-2{grid-template-columns:1fr} }
+    .muted{color:var(--muted)}
+    .kpi{display:flex; gap:12px; flex-wrap:wrap; margin-top:10px}
+    .kpi .pill{
+      border:1px solid var(--line);
+      padding:10px 12px; border-radius:12px;
+      background:rgba(0,0,0,.14);
+      min-width:160px;
+    }
+    .pill strong{display:block; font-size:18px}
+    .section{padding:12px 0 2px}
+    .section h2{margin:0 0 10px; font-size:22px}
+    .list{margin:0; padding-left:18px; color:var(--muted)}
+    .price{
+      font-size:28px; font-weight:800; margin:6px 0 0;
+    }
+    .small{font-size:13px; color:var(--muted)}
+    .divider{height:1px; background:var(--line); margin:14px 0}
+    .faq details{
+      border:1px solid var(--line);
+      border-radius:14px;
+      padding:12px 14px;
+      background:rgba(0,0,0,.12);
+    }
+    .faq summary{cursor:pointer; font-weight:700}
+    footer{
+      margin-top:28px;
+      padding:20px 0 6px;
+      border-top:1px solid var(--line);
+      color:var(--muted);
+      font-size:13px;
+    }
+    .footgrid{display:flex; justify-content:space-between; gap:14px; flex-wrap:wrap}
+    .footlinks{display:flex; gap:14px; flex-wrap:wrap}
+    .notice{
+      border:1px dashed rgba(56,189,248,.35);
+      background:rgba(56,189,248,.08);
+      padding:10px 12px; border-radius:14px;
+      color:var(--muted); font-size:13px;
+    }
+
+    /* Form */
+    label{display:block; font-size:13px; color:var(--muted); margin-bottom:6px}
+    input, select, textarea{
+      width:100%;
+      background:rgba(0,0,0,.18);
+      border:1px solid var(--line);
+      border-radius:12px;
+      padding:12px 12px;
+      color:var(--text);
+      outline:none;
+    }
+    input:focus, select:focus, textarea:focus{border-color:rgba(56,189,248,.55)}
+    .row{display:grid; grid-template-columns:1fr 1fr; gap:12px}
+    @media(max-width:640px){ .row{grid-template-columns:1fr} }
+    textarea{min-height:88px; resize:vertical}
+  </style>
+</head>
+
+<body>
+  <div class="container">
+    <header>
+      <a class="brand" href="#top" aria-label="Wplay TV">
+        <div class="logo">W</div>
+        <div>
+          <div style="font-weight:800; letter-spacing:.2px;">Wplay TV</div>
+          <div style="font-size:12px; color:var(--muted); margin-top:2px;">TV online por aplicativo</div>
+        </div>
+      </a>
+
+      <nav aria-label="Navegação">
+        <a href="#como-funciona">Como funciona</a>
+        <a href="#compatibilidade">Compatibilidade</a>
+        <a href="#planos">Planos</a>
+        <a href="#faq">Dúvidas</a>
+      </nav>
+
+      <a class="btn btn-primary" id="ctaTop" href="#" rel="noopener">💬 Pedir teste (4h)</a>
+    </header>
+
+    <!-- HERO -->
+    <main id="top" class="hero">
+      <section class="card">
+        <h1>Assista TV online com praticidade, no seu aparelho.</h1>
+        <p class="lead">
+          Teste a <strong>Wplay TV</strong> por <strong>4 horas</strong> e avalie no seu dispositivo.
+          Planos <strong>mensais</strong> por ativação (1 por aparelho) e suporte todos os dias.
+        </p>
+
+        <div class="badges">
+          <div class="badge">🎁 Teste: 4 horas</div>
+          <div class="badge">🕗 Suporte: 08:00–23:00</div>
+          <div class="badge">🌍 Brasil e exterior</div>
+          <div class="badge">📱 Multi-dispositivos</div>
+        </div>
+
+        <div style="display:flex; gap:12px; flex-wrap:wrap;">
+          <a class="btn btn-primary" id="ctaHero" href="#" rel="noopener">💬 Quero testar agora</a>
+          <a class="btn" href="#planos">Ver planos</a>
+        </div>
+
+        <div class="divider"></div>
+
+        <div class="notice">
+          <strong>Transparência:</strong> disponibilidade de conteúdos/categorias pode variar.
+          Recomendamos sempre o uso dentro das regras e com distribuição/licenças adequadas.
+        </div>
+      </section>
+
+      <!-- FORM CARD -->
+      <aside class="card">
+        <h2 style="margin:0 0 10px;">Peça seu teste no WhatsApp</h2>
+        <p class="muted" style="margin-top:0;">Preencha e clique para abrir o WhatsApp com a mensagem pronta.</p>
+
+        <div class="row">
+          <div>
+            <label for="nome">Seu nome</label>
+            <input id="nome" type="text" placeholder="Ex.: João" />
+          </div>
+          <div>
+            <label for="pais">País</label>
+            <select id="pais">
+              <option value="Brasil">Brasil</option>
+              <option value="Portugal">Portugal</option>
+              <option value="Estados Unidos">Estados Unidos</option>
+              <option value="Outro">Outro</option>
+            </select>
+          </div>
+        </div>
+
+        <div style="margin-top:12px;">
+          <label for="aparelho">Qual aparelho você vai usar?</label>
+          <select id="aparelho">
+            <option value="Smart TV (Samsung/LG)">Smart TV (Samsung/LG)</option>
+            <option value="Android TV">Android TV</option>
+            <option value="TV Box">TV Box</option>
+            <option value="Android (celular/tablet)">Android (celular/tablet)</option>
+            <option value="iPhone/iPad">iPhone/iPad</option>
+            <option value="PC/Notebook">PC/Notebook</option>
+            <option value="Console (Xbox/PlayStation)">Console (Xbox/PlayStation)</option>
+            <option value="Outro">Outro</option>
+          </select>
+        </div>
+
+        <div class="row" style="margin-top:12px;">
+          <div>
+            <label for="plano">Plano (mensal)</label>
+            <select id="plano">
+              <option value="1 aparelho — R$ 30/mês">1 aparelho — R$ 30/mês</option>
+              <option value="2 aparelhos — R$ 35/mês">2 aparelhos — R$ 35/mês</option>
+              <option value="3 aparelhos — R$ 45/mês">3 aparelhos — R$ 45/mês</option>
+            </select>
+          </div>
+          <div>
+            <label for="horario">Melhor horário p/ suporte</label>
+            <select id="horario">
+              <option value="Qualquer horário (08–23)">Qualquer horário (08–23)</option>
+              <option value="Manhã">Manhã</option>
+              <option value="Tarde">Tarde</option>
+              <option value="Noite">Noite</option>
+            </select>
+          </div>
+        </div>
+
+        <div style="margin-top:12px;">
+          <label for="msgExtra">Mensagem (opcional)</label>
+          <textarea id="msgExtra" placeholder="Ex.: quero testar na TV da sala, internet de 300MB..."></textarea>
+        </div>
+
+        <div style="display:flex; gap:12px; flex-wrap:wrap; margin-top:14px;">
+          <button class="btn btn-primary" id="btnWhats">💬 Abrir WhatsApp</button>
+          <button class="btn" id="btnCopy">📋 Copiar mensagem</button>
+        </div>
+
+        <p class="small" style="margin-top:12px;">
+          Ao clicar, você será direcionado(a) ao WhatsApp com uma mensagem preenchida.
+        </p>
+      </aside>
+    </main>
+
+    <!-- COMO FUNCIONA -->
+    <section id="como-funciona" class="section">
+      <h2>Como funciona</h2>
+      <div class="grid grid-3">
+        <div class="card">
+          <strong>1) Peça o teste</strong>
+          <p class="muted">Você recebe um acesso de <strong>4 horas</strong> para avaliar no seu aparelho.</p>
+        </div>
+        <div class="card">
+          <strong>2) Instale e configure</strong>
+          <p class="muted">Eu te envio o passo a passo e te ajudo no processo (suporte 08:00–23:00).</p>
+        </div>
+        <div class="card">
+          <strong>3) Escolha o plano mensal</strong>
+          <p class="muted">Planos por dispositivo (1 ativação por aparelho). Você escolhe 1, 2 ou 3 telas.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- COMPATIBILIDADE -->
+    <section id="compatibilidade" class="section">
+      <h2>Compatibilidade</h2>
+      <div class="grid grid-2">
+        <div class="card">
+          <p style="margin-top:0; font-weight:700;">Funciona em:</p>
+          <ul class="list">
+            <li>Smart TVs (Samsung/LG) e Android TV</li>
+            <li>TV Box e projetores compatíveis</li>
+            <li>Android (celular/tablet) e iPhone/iPad</li>
+            <li>PC/Notebook (desktop)</li>
+            <li>Consoles (Xbox/PlayStation)</li>
+          </ul>
+        </div>
+        <div class="card">
+          <p style="margin-top:0; font-weight:700;">Dica de estabilidade</p>
+          <p class="muted">
+            Para melhor experiência, especialmente com mais de uma tela, é recomendado usar
+            as telas simultâneas <strong>na mesma rede/ambiente</strong> quando possível e com boa internet.
+          </p>
+          <div class="kpi">
+            <div class="pill"><strong>Suporte</strong><span class="muted">08:00–23:00</span></div>
+            <div class="pill"><strong>Teste</strong><span class="muted">4 horas</span></div>
+            <div class="pill"><strong>Alcance</strong><span class="muted">Brasil + exterior</span></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- PLANOS -->
+    <section id="planos" class="section">
+      <h2>Planos mensais</h2>
+      <div class="grid grid-3">
+        <div class="card">
+          <strong>1 aparelho</strong>
+          <div class="price">R$ 30</div>
+          <div class="small">por mês • 1 ativação por dispositivo</div>
+          <div class="divider"></div>
+          <a class="btn btn-primary planBtn" data-plan="1 aparelho — R$ 30/mês" href="#">Quero esse</a>
+        </div>
+
+        <div class="card">
+          <strong>2 aparelhos</strong>
+          <div class="price">R$ 35</div>
+          <div class="small">por mês • 2 ativações</div>
+          <div class="divider"></div>
+          <a class="btn btn-primary planBtn" data-plan="2 aparelhos — R$ 35/mês" href="#">Quero esse</a>
+        </div>
+
+        <div class="card">
+          <strong>3 aparelhos</strong>
+          <div class="price">R$ 45</div>
+          <div class="small">por mês • 3 ativações</div>
+          <div class="divider"></div>
+          <a class="btn btn-primary planBtn" data-plan="3 aparelhos — R$ 45/mês" href="#">Quero esse</a>
+        </div>
+      </div>
+
+      <p class="small" style="margin-top:12px;">
+        * Valores podem ser atualizados. Confirme no atendimento. Ativação é vinculada ao dispositivo.
+      </p>
+    </section>
+
+    <!-- FAQ -->
+    <section id="faq" class="section">
+      <h2>Dúvidas frequentes</h2>
+      <div class="grid faq">
+        <details>
+          <summary>O teste dura quanto tempo?</summary>
+          <p class="muted">O teste é de <strong>4 horas</strong>, suficiente para você avaliar estabilidade e compatibilidade.</p>
+        </details>
+
+        <details>
+          <summary>Vocês atendem fora do Brasil?</summary>
+          <p class="muted">Sim. Atendemos no exterior também. A experiência depende da internet local e do aparelho.</p>
+        </details>
+
+        <details>
+          <summary>Qual o horário de suporte?</summary>
+          <p class="muted">De <strong>08:00</strong> até <strong>23:00</strong>, todos os dias.</p>
+        </details>
+
+        <details>
+          <summary>Posso usar em mais de um aparelho?</summary>
+          <p class="muted">
+            Sim. Você pode contratar 1, 2 ou 3 ativações. Para melhor estabilidade com uso simultâneo,
+            recomendamos o uso na mesma rede/ambiente quando possível.
+          </p>
+        </details>
+
+        <details>
+          <summary>Como eu peço o teste?</summary>
+          <p class="muted">Clique em qualquer botão de WhatsApp desta página e me envie a mensagem automática.</p>
+        </details>
+      </div>
+    </section>
+
+    <!-- CTA FINAL -->
+    <section class="section">
+      <div class="card" style="display:flex; align-items:center; justify-content:space-between; gap:14px; flex-wrap:wrap;">
+        <div>
+          <strong style="font-size:18px;">Quer testar agora?</strong>
+          <div class="muted">Clique e fale comigo no WhatsApp para liberar seu teste de 4 horas.</div>
+        </div>
+        <a class="btn btn-primary" id="ctaBottom" href="#" rel="noopener">💬 Pedir teste (4h)</a>
+      </div>
+    </section>
+
+    <footer>
+      <div class="footgrid">
+        <div>
+          <div style="font-weight:700; color:var(--text);">Wplay TV</div>
+          <div class="muted">TV online por aplicativo • Suporte 08:00–23:00</div>
+        </div>
+        <div class="footlinks">
+          <a href="#faq">Dúvidas</a>
+          <a href="#planos">Planos</a>
+          <a href="#top">Topo</a>
+        </div>
+      </div>
+      <p class="small" style="margin-top:12px;">
+        Aviso: esta página é um modelo. Ajuste textos, preços e políticas conforme sua operação e conformidade (LGPD/termos).
+      </p>
+    </footer>
+  </div>
+
+  <script>
+    // =========================
+    // CONFIGURAÇÃO PRINCIPAL
+    // =========================
+    // Coloque seu WhatsApp aqui no formato: 55DDDNUMERO (sem +, sem espaços)
+    const WA_NUMBER = "55SEUDDDSEUNUMERO"; // Ex.: "5585987654321"
+
+    // Texto padrão base
+    function buildMessage(overrides = {}) {
+      const nome = (document.getElementById("nome")?.value || "").trim();
+      const pais = document.getElementById("pais")?.value || "Brasil";
+      const aparelho = document.getElementById("aparelho")?.value || "";
+      const plano = overrides.plan || (document.getElementById("plano")?.value || "");
+      const horario = document.getElementById("horario")?.value || "";
+      const extra = (document.getElementById("msgExtra")?.value || "").trim();
+
+      // Captura UTM (se você usar anúncios/campanhas)
+      const params = new URLSearchParams(window.location.search);
+      const utmSource = params.get("utm_source");
+      const utmCampaign = params.get("utm_campaign");
+
+      let msg =
+`Olá! ${nome ? "Meu nome é " + nome + ". " : ""}Quero solicitar o *teste de 4 horas* da *Wplay TV*.
+
+• País: ${pais}
+• Aparelho: ${aparelho}
+• Plano de interesse: ${plano}
+• Melhor horário p/ suporte: ${horario}`;
+
+      if (extra) msg += `\n\nObs.: ${extra}`;
+
+      if (utmSource || utmCampaign) {
+        msg += `\n\n(Origem: ${utmSource || "-"} | Campanha: ${utmCampaign || "-"})`;
+      }
+
+      msg += `\n\nObrigado!`;
+      return msg;
+    }
+
+    function waLink(message) {
+      const text = encodeURIComponent(message);
+      // wa.me funciona bem no mobile e desktop (abre WhatsApp Web se necessário)
+      return `https://wa.me/${WA_NUMBER}?text=${text}`;
+    }
+
+    function openWhatsApp(custom = {}) {
+      if (!WA_NUMBER || WA_NUMBER.includes("SEU")) {
+        alert("Edite o WA_NUMBER no código (formato 55DDDNUMERO) antes de usar.");
+        return;
+      }
+      const msg = buildMessage(custom);
+      window.open(waLink(msg), "_blank", "noopener");
+    }
+
+    // Botões gerais
+    document.getElementById("ctaTop")?.addEventListener("click", (e)=>{ e.preventDefault(); openWhatsApp(); });
+    document.getElementById("ctaHero")?.addEventListener("click", (e)=>{ e.preventDefault(); openWhatsApp(); });
+    document.getElementById("ctaBottom")?.addEventListener("click", (e)=>{ e.preventDefault(); openWhatsApp(); });
+    document.getElementById("btnWhats")?.addEventListener("click", (e)=>{ e.preventDefault(); openWhatsApp(); });
+
+    // Botões de plano
+    document.querySelectorAll(".planBtn").forEach(btn => {
+      btn.addEventListener("click", (e) => {
+        e.preventDefault();
+        const plan = btn.getAttribute("data-plan") || "";
+        // Também atualiza o select do formulário
+        const sel = document.getElementById("plano");
+        if (sel) sel.value = plan;
+        openWhatsApp({ plan });
+      });
+    });
+
+    // Copiar mensagem
+    document.getElementById("btnCopy")?.addEventListener("click", async (e)=>{
+      e.preventDefault();
+      const msg = buildMessage();
+      try{
+        await navigator.clipboard.writeText(msg);
+        alert("Mensagem copiada! Agora é só colar no WhatsApp.");
+      }catch(err){
+        alert("Não consegui copiar automaticamente. Selecione e copie manualmente.");
+      }
+    });
+  </script>
+</body>
+</html>
