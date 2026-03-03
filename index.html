@@ -1,0 +1,78 @@
+<script>
+  // =========================
+  // CONFIGURAÇÃO PRINCIPAL
+  // =========================
+  // WhatsApp no formato: 55DDDNUMERO (sem +, sem espaços)
+  const WA_NUMBER = "5599985291535";
+
+  // Texto padrão base (mensagem profissional)
+  function buildMessage(overrides = {}) {
+    const nome = (document.getElementById("nome")?.value || "").trim();
+    const pais = document.getElementById("pais")?.value || "Brasil";
+    const aparelho = document.getElementById("aparelho")?.value || "";
+    const plano = overrides.plan || (document.getElementById("plano")?.value || "");
+    const horario = document.getElementById("horario")?.value || "";
+    const extra = (document.getElementById("msgExtra")?.value || "").trim();
+
+    // Captura UTM (se você usar anúncios/campanhas)
+    const params = new URLSearchParams(window.location.search);
+    const utmSource = params.get("utm_source");
+    const utmCampaign = params.get("utm_campaign");
+
+    let msg =
+`Olá! ${nome ? "Meu nome é " + nome + ". " : ""}Gostaria de solicitar o *teste de 4 horas* da *Wplay TV*, por favor.
+
+• País: ${pais}
+• Aparelho: ${aparelho}
+• Plano de interesse: ${plano}
+• Melhor horário para suporte (08h–23h): ${horario}`;
+
+    if (extra) msg += `\n• Observação: ${extra}`;
+
+    if (utmSource || utmCampaign) {
+      msg += `\n\n(Origem: ${utmSource || "-"} | Campanha: ${utmCampaign || "-"})`;
+    }
+
+    msg += `\n\nAguardo as instruções. Obrigado!`;
+    return msg;
+  }
+
+  function waLink(message) {
+    const text = encodeURIComponent(message);
+    return `https://wa.me/${WA_NUMBER}?text=${text}`;
+  }
+
+  function openWhatsApp(custom = {}) {
+    const msg = buildMessage(custom);
+    window.open(waLink(msg), "_blank", "noopener");
+  }
+
+  // Botões gerais
+  document.getElementById("ctaTop")?.addEventListener("click", (e)=>{ e.preventDefault(); openWhatsApp(); });
+  document.getElementById("ctaHero")?.addEventListener("click", (e)=>{ e.preventDefault(); openWhatsApp(); });
+  document.getElementById("ctaBottom")?.addEventListener("click", (e)=>{ e.preventDefault(); openWhatsApp(); });
+  document.getElementById("btnWhats")?.addEventListener("click", (e)=>{ e.preventDefault(); openWhatsApp(); });
+
+  // Botões de plano
+  document.querySelectorAll(".planBtn").forEach(btn => {
+    btn.addEventListener("click", (e) => {
+      e.preventDefault();
+      const plan = btn.getAttribute("data-plan") || "";
+      const sel = document.getElementById("plano");
+      if (sel) sel.value = plan;
+      openWhatsApp({ plan });
+    });
+  });
+
+  // Copiar mensagem
+  document.getElementById("btnCopy")?.addEventListener("click", async (e)=>{
+    e.preventDefault();
+    const msg = buildMessage();
+    try{
+      await navigator.clipboard.writeText(msg);
+      alert("Mensagem copiada! Agora é só colar no WhatsApp.");
+    }catch(err){
+      alert("Não consegui copiar automaticamente. Selecione e copie manualmente.");
+    }
+  });
+</script>
